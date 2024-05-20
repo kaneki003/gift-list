@@ -1,8 +1,16 @@
 # Gift List
 
-To get started with the repository, clone it and then run `npm install` in the top-level directory to install the depedencies.
+## Overview
 
-There are three folders in this repository:
+"Gift List" is a blockchain-based application that determines whether a person is included in a special list. If the person's name is found within the list, they are eligible to receive a gift. This project utilizes Merkle trees for efficient data management and verification within the blockchain.
+
+## Project Description
+
+The main functionality of "Gift List" is to verify the presence of a person's name in a large dataset using Merkle trees. This data structure allows for the consolidation of thousands of names into a single hash string on the server side.
+
+On the client side, a proof is generated which contains the least amount of information required to reconstruct the root hash, typically in the order of `log(N)` where `N` is the number of elements in the list. This proof is then sent to the server, which verifies the computed root hash against the actual root hash stored in the database, thus confirming the person's presence in the list.
+
+In this system, the client acts as the prover, while the server takes on the role of the verifier.
 
 ## Client
 
@@ -16,11 +24,6 @@ You can run the server from the top-level directory with `node server/index`. Th
 
 Think of the server as the _verifier_ here. It needs to verify that the `name` passed by the client is in the `MERKLE_ROOT`. If it is, then we can send the gift! 
 
-## Utils
-
-There are a few files in utils:
-
-- The `niceList.json` which contains all the names of the people who deserve a gift this year (this is randomly generated, feel free to add yourself and others to this list!)
-- The `example.js` script shows how we can generate a root, generate a proof and verify that some value is in the root using the proof. Try it out from the top-level folder with `node/example.js`
-- The `MerkleTree.js` should look familiar from the Merkle Tree module! This one has been modified so you should not have to deal with any crypto type conversion. You can import this in your client/server
-- The `verifyProof.js` should also look familiar. This was the last stage in the module. You can use this function to prove a name is in the merkle root, as show in the example.
+## Dependencies
+ `npm install`  
+ `npm i ethereum-cryptography`
